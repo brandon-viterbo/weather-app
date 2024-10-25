@@ -1,3 +1,11 @@
+:root {
+  --large-font-size: 5em;
+  --med-font-size: 1.75em;
+
+  --secondary-text-color: hsl(0 0 40%);
+  --gap-size: 15px;
+}
+
 /*
   Josh's Custom CSS Reset
   https://www.joshwcomeau.com/css/custom-css-reset/
@@ -8,11 +16,12 @@
 }
 
 * {
+  padding: 0;
   margin: 0;
 }
 
 body {
-  line-height: 1.5;
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -38,4 +47,64 @@ h1, h2, h3, h4, h5, h6 {
 
 #root, #__next {
   isolation: isolate;
+}
+
+/*Defining rules broadly*/
+.container {
+  width: 768px;
+}
+.current-conditions, .current-weather, .temp, .hourly > .forecast {
+  display: flex;
+}
+
+.toggle > span, .wind-moisture *, .time-condition *, .hour-card {
+  color: var(--secondary-text-color);
+}
+
+/*Rules for current-conditions row*/
+.current-conditions {
+  justify-content: space-between;
+  margin:var(--gap-size) 0px;
+}
+
+.wind-moisture, .time-condition {
+  padding: 5px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.time-condition {
+  text-align: end;
+}
+
+.current-weather {
+  gap: var(--gap-size);
+}
+
+.icon, .temp > span {
+  font-size: var(--large-font-size);
+}
+
+.temp > .toggle > span {
+ font-size: var(--med-font-size);
+}
+
+/*Rules for hourly row*/
+.hourly > .toggle {
+  display: flex;
+  gap: var(--gap-size);
+}
+
+.hourly > .toggle * {
+  font-size: var(--med-font-size);
+}
+
+.hourly > .forecast {
+  margin: var(--gap-size) 0px;
+  justify-content: space-between;
+}
+
+.hourly > .forecast * {
+  text-align: center;
 }
