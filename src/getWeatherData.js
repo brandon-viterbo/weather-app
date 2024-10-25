@@ -12,7 +12,7 @@ function makeRequestURL(apiKey, city, startDate, endDate, url) {
   return requestURL;
 }
 
-async function getCityWeather(apiKey, city, startDate='', endDate='', url=baseURL) {
+export async function getCityWeather(apiKey, city, startDate='', endDate='', url=baseURL) {
   const requestURL = makeRequestURL(apiKey, city, startDate, endDate, url);
   const response = await fetch(requestURL);
   const weatherData = await response.json();
@@ -20,16 +20,15 @@ async function getCityWeather(apiKey, city, startDate='', endDate='', url=baseUR
   return weatherData;
 }
 
+
 function getHourlyForecastWithinDay(dailyWeatherData) {
   const hours = dailyWeatherData.hours;
   const cleanedHourlyData = hours.map((hr) => {
     return {
       datetime: hr.datetime,
-      feelslike: hr.feelslike,
-      humidity: hr.humidity,
+      temp: hr.temp,
       precipprob: hr.precipprob,
       preciptype: hr.preciptype,
-      temp: hr.temp,
       winddir: hr.winddir,
       windspeed: hr.windspeed,
     }
@@ -43,15 +42,29 @@ function getDaysForecast(weatherData, dayIndex) {
   const daysForecast = {
     datetime: day.datetime,
     conditions: day.conditions,
-    feelslike: day.feelslike,
+    temp: day.temp,
+    tempmax: day.tempmax,
+    tempmin: day.tempmin,
     hours: getHourlyForecastWithinDay(day),
   }
 
   return daysForecast;
 }
 
-export async function getThisWeeksForecast(apiKey, city) {
-  const weatherData = await getCityWeather(apiKey, city);
+export function getCurrentConditions(weatherData) {
+  const currentConditions = weatherData.currentConditions;
+  return {
+    datetime: currentConditions.datetime,
+    conditions: currentConditions.conditions,
+    temp: currentConditions.temp,
+    precipprob: currentConditions.precipprob,
+    humidity: currentConditions.humidity,
+    windspeed: currentConditions.windspeed,
+  }
+}
+
+export function getThisWeeksForecast(weatherData) {
+  console.log(weatherData);
   const days = weatherData.days;
   const weeksForecast = [];
   

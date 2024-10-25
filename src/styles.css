@@ -52,6 +52,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /*Defining rules broadly*/
 .container {
+  margin-top: 50px;
+  margin-left: 50px;
   width: 768px;
 }
 .current-conditions, .current-weather, .temp, .forecast {
@@ -98,13 +100,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*Rules for hourly and weekly row*/
-.hourly > .toggle {
-  display: flex;
-  gap: var(--gap-size);
-}
-
 .hourly > .toggle * {
   font-size: var(--med-font-size);
+}
+
+.hourly > .toggle > span {
+  padding: var(--small-gap) var(--small-gap);
+  border-right: 2px solid var(--secondary-text-color);
+}
+
+.hourly > .toggle > span:last-child {
+  padding-right: 0px;
+  border-width: 0;
 }
 
 .day-card {
