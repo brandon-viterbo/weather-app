@@ -4,6 +4,7 @@
 
   --secondary-text-color: hsl(0 0 40%);
   --gap-size: 15px;
+  --small-gap: 5px;
 }
 
 /*
@@ -53,12 +54,18 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   width: 768px;
 }
-.current-conditions, .current-weather, .temp, .hourly > .forecast {
+.current-conditions, .current-weather, .temp, .forecast {
   display: flex;
 }
 
-.toggle > span, .wind-moisture *, .time-condition *, .hour-card {
+.toggle > span, .wind-moisture *, .time-condition *, .hour-card, .weekly * {
   color: var(--secondary-text-color);
+}
+
+.forecast {
+  margin: var(--gap-size) 0px;
+  justify-content: space-between;
+  text-align: center;
 }
 
 /*Rules for current-conditions row*/
@@ -82,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: var(--gap-size);
 }
 
-.icon, .temp > span {
+.current-weather > .icon, .temp > span {
   font-size: var(--large-font-size);
 }
 
@@ -90,7 +97,7 @@ h1, h2, h3, h4, h5, h6 {
  font-size: var(--med-font-size);
 }
 
-/*Rules for hourly row*/
+/*Rules for hourly and weekly row*/
 .hourly > .toggle {
   display: flex;
   gap: var(--gap-size);
@@ -100,11 +107,17 @@ h1, h2, h3, h4, h5, h6 {
   font-size: var(--med-font-size);
 }
 
-.hourly > .forecast {
-  margin: var(--gap-size) 0px;
-  justify-content: space-between;
+.day-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
 }
 
-.hourly > .forecast * {
-  text-align: center;
+.day-card > .icon {
+  font-size: var(--med-font-size);
+}
+
+.day-card > .temp {
+  display: flex;
+  gap: var(--small-gap);
 }
