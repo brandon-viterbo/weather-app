@@ -55,6 +55,7 @@ export function getCurrentConditions(weatherData) {
   const currentConditions = weatherData.currentConditions;
   return {
     datetime: currentConditions.datetime,
+    datetimeEpoch: currentConditions.datetimeEpoch,
     conditions: currentConditions.conditions,
     temp: currentConditions.temp,
     precipprob: currentConditions.precipprob,
@@ -64,7 +65,6 @@ export function getCurrentConditions(weatherData) {
 }
 
 export function getThisWeeksForecast(weatherData) {
-  console.log(weatherData);
   const days = weatherData.days;
   const weeksForecast = [];
   
