@@ -22,6 +22,7 @@ export function makeHourlyForecastRow(parentElement, intervalSize=3) {
 
     data.textContent = '15°';
     hour.textContent = `${i*intervalSize}:00`;
+    hourCard.setAttribute('data-index', `${i}`);
 
     parentElement.appendChild(hourCard);
   }
@@ -71,6 +72,7 @@ export function makeWeeklyForecastRow(parentElement, startingDayIndex) {
     const high = dayCard.querySelector('.high');
     const low = dayCard.querySelector('.low');
 
+    dayCard.setAttribute('data-index', `${i}`);
     day.textContent = days[findDaysIndex(i + startingDayIndex)];
     icon.textContent = '☀️';
     high.textContent = '23°';
