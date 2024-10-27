@@ -51,6 +51,10 @@ function getDaysForecast(weatherData, dayIndex) {
     temp: day.temp,
     tempmax: day.tempmax,
     tempmin: day.tempmin,
+    precipprob: day.precipprob,
+    humidity: day.humidity,
+    windspeed: day.windspeed,
+    hour: '00',
     hours: getHourlyForecastWithinDay(day),
   }
 
