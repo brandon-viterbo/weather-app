@@ -17,7 +17,21 @@ function writeTextInElement(parentContainer, querySelector, text) {
   const element = parentContainer.querySelector(querySelector);
 
   element.textContent = text;
-} 
+}
+
+export function highlightToggle(toggleContainer, selectedChild, highlightColor, defaultColour='inherit') {
+  const toggleElements = toggleContainer.children;
+  
+  for (let i = 0; i < toggleElements.length; i++) {
+    const element = toggleElements[i];
+    
+    if (i === selectedChild) {
+      element.style.backgroundColor = highlightColor;
+    } else {
+      element.style.backgroundColor = defaultColour;
+    }
+  }
+}
 
 export function updateCurrentConditions(parentContainer, currentConditions) {
   const hour = getHour(currentConditions.datetime)
