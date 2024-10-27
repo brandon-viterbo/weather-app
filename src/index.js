@@ -1,7 +1,7 @@
 import './styles.css';
 import { getCityWeather, getCurrentConditions, getThisWeeksForecast } from './getWeatherData';
 import { makeHourlyForecastRow, makeWeeklyForecastRow } from './uiConstructors';
-import { updateCurrentConditions, updateWeeklyForecast } from './uiUpdaters';
+import { updateCurrentConditions, updateWeeklyForecast, updateTodaysHourly } from './uiUpdaters';
 
 //API key publically available, no consequence for exposing it.
 const myAPIkey = 'WXDR66S93RLSN689NRMZKADSK';
@@ -18,4 +18,5 @@ makeHourlyForecastRow(hourlyForecastRow);
 makeWeeklyForecastRow(weeklyForecastRow, 3);
 
 updateCurrentConditions(currentConditionsDisplay, currentConditionsData);
+updateTodaysHourly(hourlyForecastRow, currentConditionsData, weeklyConditions)
 updateWeeklyForecast(weeklyForecastRow, weeklyConditions);

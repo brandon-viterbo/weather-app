@@ -44,3 +44,32 @@ export function updateWeeklyForecast(parentContainer, weeklyForecast) {
     writeTextInElement(card, '.low', `${dayWeatherData.tempmin}°`);
   }
 }
+
+export function updateTodaysHourly(
+  parentContainer, 
+  currentConditions, 
+  weeklyForecast, 
+  dataToShow='temp') {
+  const hourCards = parentContainer.children;
+  const intervalSize = 24 / hourCards.length;
+  const currentHour = parseInt(getHour(currentConditions.datetime));
+  const todaysData = weeklyForecast[0];
+  const tomorrowsData = weeklyForecast[1];
+
+
+  for (let i = 0; i < hourCards.length; i++) {
+    const card = hourCards[i];
+    const hour = currentHour + (i * intervalSize);
+    let hourData = {};
+
+    if (hour > 23) {
+      hourData = tomorrowsData.hours[hour - 24];
+      writeTextInElement(card, '.hour', `${hour - 24}:00`);
+    } else {
+      hourData = todaysData.hours[hour];
+      writeTextInElement(card, '.hour', `${hour}:00`);
+    }
+
+    writeTextInElement(card, '.data', hourData[dataToShow]);
+  } 
+}
