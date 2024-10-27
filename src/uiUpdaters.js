@@ -45,31 +45,31 @@ export function updateWeeklyForecast(parentContainer, weeklyForecast) {
   }
 }
 
-export function updateTodaysHourly(
-  parentContainer, 
-  currentConditions, 
-  weeklyForecast, 
-  dataToShow='temp') {
+export function updateHourly(parentContainer, currentConditions, weeklyForecast, dayToShow=0, dataToShow='temp') {
   const hourCards = parentContainer.children;
   const intervalSize = 24 / hourCards.length;
-  const currentHour = parseInt(getHour(currentConditions.datetime));
+  const dayData = weeklyForecast[dayToShow];
   const todaysData = weeklyForecast[0];
   const tomorrowsData = weeklyForecast[1];
+  let currentHour = parseInt(getHour(currentConditions.datetime));
 
+  if (dayToShow > 0) { currentHour = 0 }
 
   for (let i = 0; i < hourCards.length; i++) {
     const card = hourCards[i];
     const hour = currentHour + (i * intervalSize);
     let hourData = {};
 
-    if (hour > 23) {
+    if (hour > 23 && dayToShow === 0) {
       hourData = tomorrowsData.hours[hour - 24];
       writeTextInElement(card, '.hour', `${hour - 24}:00`);
-    } else {
+    } else if (dayToShow === 0) {
       hourData = todaysData.hours[hour];
       writeTextInElement(card, '.hour', `${hour}:00`);
+    } else {
+      hourData = dayData.hours[hour];
     }
 
     writeTextInElement(card, '.data', hourData[dataToShow]);
-  } 
+  }
 }
