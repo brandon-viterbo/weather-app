@@ -15,6 +15,8 @@ const conditions = conditionToggles.children;
 const hoverColor = window.getComputedStyle(document.documentElement).getPropertyValue('--hover-color');
 const searchBar = document.querySelector('input');
 const cityDisplay = document.querySelector('.city');
+const unitToggle = document.querySelector('.temp > .toggle');
+const units = unitToggle.children;
 
 let weatherData = {};
 let currentConditionsData = {};
@@ -59,12 +61,18 @@ for (let i = 0; i < conditions.length; i++) {
   });
 }
 
-console.log(searchBar)
+for (let i = 0; i < units.length; i++) {
+  const element = units[i];
+  
+  element.addEventListener('click', (e) => {
+    highlightToggle(unitToggle, i, hoverColor);
+  });
+}
 
 searchBar.addEventListener('keyup', (e) => {
   if (e.key === 'Enter') {
-    console.log(searchBar.value)
     const cityName = searchBar.value;
     initializeDisplay(cityName);
+    searchBar.value = '';
   }
 })
