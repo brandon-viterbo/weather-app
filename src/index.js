@@ -10,10 +10,13 @@ const hourlyForecastRow = document.querySelector('.hourly > .forecast');
 const weeklyForecastRow = document.querySelector('.weekly');
 const dayCards = weeklyForecastRow.children;
 const currentConditionsDisplay = document.querySelector('.current-conditions');
+const conditionToggles = document.querySelector('.hourly > .toggle');
+const conditions = conditionToggles.children;
 
 const weatherData = await getCityWeather(myAPIkey, 'Montreal');
 const currentConditionsData = getCurrentConditions(weatherData);
 const weeklyConditionsData = getThisWeeksForecast(weatherData);
+let dayPicked = 0;
 
 console.log(weatherData)
 
@@ -29,7 +32,16 @@ for (let i = 0; i < dayCards.length; i++) {
   
   card.addEventListener('click', (e) => {
     const dayToShow = parseInt(card.dataset.index);
+    dayPicked = i;
   
     updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData, dayToShow);
+  });
+}
+
+for (let i = 0; i < conditions.length; i++) {
+  const condition = conditions[i];
+
+  condition.addEventListener('click', (e) => {
+    updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData, dayPicked, condition.className);
   });
 }

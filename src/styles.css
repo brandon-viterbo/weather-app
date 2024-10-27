@@ -3,6 +3,8 @@
   --med-font-size: 1.75em;
 
   --secondary-text-color: hsl(0 0 40%);
+  --hover-color: hsl(0 0 80%);
+
   --gap-size: 15px;
   --small-gap: 5px;
 }
@@ -56,12 +58,17 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 50px;
   width: 768px;
 }
-.current-conditions, .current-weather, .temp, .forecast {
+.current-conditions, .current-weather, .current-conditions > .temp, .forecast {
   display: flex;
 }
 
 .toggle > span, .wind-moisture *, .time-condition *, .hour-card, .weekly * {
   color: var(--secondary-text-color);
+}
+
+.toggle > span:hover, .day-card:hover {
+  cursor: pointer;
+  background-color: var(--hover-color);
 }
 
 .forecast {
