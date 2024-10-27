@@ -13,21 +13,30 @@ const currentConditionsDisplay = document.querySelector('.current-conditions');
 const conditionToggles = document.querySelector('.hourly > .toggle');
 const conditions = conditionToggles.children;
 const hoverColor = window.getComputedStyle(document.documentElement).getPropertyValue('--hover-color');
+const searchBar = document.querySelector('input');
+const cityDisplay = document.querySelector('.city');
 
-const weatherData = await getCityWeather(myAPIkey, 'Montreal');
-const currentConditionsData = getCurrentConditions(weatherData);
-const weeklyConditionsData = getThisWeeksForecast(weatherData);
+let weatherData = {};
+let currentConditionsData = {};
+let weeklyConditionsData = {};
 let dayPicked = 0;
 
-console.log(weatherData)
+async function initializeDisplay(cityName) {
+  cityDisplay.textContent = cityName;
+  weatherData = await getCityWeather(myAPIkey, cityName);
+  currentConditionsData = getCurrentConditions(weatherData);
+  weeklyConditionsData = getThisWeeksForecast(weatherData);
+  dayPicked = 0;
+  updateCurrentConditions(currentConditionsDisplay, currentConditionsData);
+  updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData)
+  updateWeeklyForecast(weeklyForecastRow, weeklyConditionsData);
+  highlightToggle(conditionToggles, 0, hoverColor);
+}
 
 makeHourlyForecastRow(hourlyForecastRow);
 makeWeeklyForecastRow(weeklyForecastRow, 3);
 
-updateCurrentConditions(currentConditionsDisplay, currentConditionsData);
-updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData)
-updateWeeklyForecast(weeklyForecastRow, weeklyConditionsData);
-highlightToggle(conditionToggles, 0, hoverColor);
+await initializeDisplay('Montreal');
 
 for (let i = 0; i < dayCards.length; i++) {
   const card = dayCards[i];
@@ -49,3 +58,13 @@ for (let i = 0; i < conditions.length; i++) {
     updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData, dayPicked, condition.className);
   });
 }
+
+console.log(searchBar)
+
+searchBar.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    console.log(searchBar.value)
+    const cityName = searchBar.value;
+    initializeDisplay(cityName);
+  }
+})
