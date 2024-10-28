@@ -19,16 +19,16 @@ function writeTextInElement(parentContainer, querySelector, text) {
   element.textContent = text;
 }
 
-export function highlightToggle(toggleContainer, selectedChild, highlightColor, defaultColour='inherit') {
+export function highlightToggle(toggleContainer, selectedChild, highlightRule='selected') {
   const toggleElements = toggleContainer.children;
   
   for (let i = 0; i < toggleElements.length; i++) {
     const element = toggleElements[i];
     
     if (i === selectedChild) {
-      element.style.backgroundColor = highlightColor;
+      element.classList.add(highlightRule);
     } else {
-      element.style.backgroundColor = defaultColour;
+      element.classList.remove(highlightRule);
     }
   }
 }

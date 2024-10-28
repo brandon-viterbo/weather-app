@@ -32,7 +32,8 @@ async function initializeDisplay(cityName) {
   updateCurrentConditions(currentConditionsDisplay, currentConditionsData);
   updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData)
   updateWeeklyForecast(weeklyForecastRow, weeklyConditionsData);
-  highlightToggle(conditionToggles, 0, hoverColor);
+  highlightToggle(conditionToggles, 0);
+  highlightToggle(unitToggle, 0);
 }
 
 makeHourlyForecastRow(hourlyForecastRow);
@@ -47,7 +48,7 @@ for (let i = 0; i < dayCards.length; i++) {
     const dayToShow = parseInt(card.dataset.index);
     dayPicked = i;
   
-    highlightToggle(conditionToggles, 0, hoverColor);
+    highlightToggle(conditionToggles, 0);
     updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData, dayToShow);
   });
 }
@@ -56,7 +57,7 @@ for (let i = 0; i < conditions.length; i++) {
   const condition = conditions[i];
 
   condition.addEventListener('click', (e) => {
-    highlightToggle(conditionToggles, i, hoverColor);
+    highlightToggle(conditionToggles, i);
     updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData, dayPicked, condition.className);
   });
 }
@@ -65,7 +66,7 @@ for (let i = 0; i < units.length; i++) {
   const element = units[i];
   
   element.addEventListener('click', (e) => {
-    highlightToggle(unitToggle, i, hoverColor);
+    highlightToggle(unitToggle, i);
   });
 }
 
