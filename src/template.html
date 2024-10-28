@@ -17,15 +17,15 @@
         <div class="temp">
           <span>17</span>
           <div class="toggle">
-            <span class="celsius">°C</span>
-            <span class="fahrenheit">°F</span>
+            <span class="metric">°C</span>
+            <span class="us">°F</span>
           </div>
         </div>
   
         <div class="wind-moisture">
           <div class="precip">Precipitation: <span></span></div>
           <div class="humidity">Humidity: <span></span></div>
-          <div class="wind">Wind: <span></span></div>
+          <div class="wind">Wind: <span></span> <span class="unit">km/h</span></div>
         </div>
       </div>
       
@@ -38,7 +38,7 @@
 
     <div class="hourly">
       <div class="toggle">
-        <span class="temp">Temperature</span><span class="precipprob">Precipitation</span><span class="windspeed">Wind</span>
+        <span class="temp" data-index="0">Temperature</span><span class="precipprob" data-index="1">Precipitation</span><span class="windspeed" data-index="2">Wind</span>
       </div>
       <div class="forecast"></div>
     </div>
