@@ -23,17 +23,17 @@ let currentConditionsData = {};
 let weeklyConditionsData = {};
 let dayPicked = 0;
 
-async function initializeDisplay(cityName) {
+async function initializeDisplay(cityName, dayToShow=0, unitToUse=0, dataToShow=0) {
   cityDisplay.textContent = cityName;
   weatherData = await getCityWeather(myAPIkey, cityName);
   currentConditionsData = getCurrentConditions(weatherData);
   weeklyConditionsData = getThisWeeksForecast(weatherData);
-  dayPicked = 0;
+  dayPicked = dayToShow;
   updateCurrentConditions(currentConditionsDisplay, currentConditionsData);
   updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData)
   updateWeeklyForecast(weeklyForecastRow, weeklyConditionsData);
-  highlightToggle(conditionToggles, 0);
-  highlightToggle(unitToggle, 0);
+  highlightToggle(conditionToggles, unitToUse);
+  highlightToggle(unitToggle, dataToShow);
 }
 
 makeHourlyForecastRow(hourlyForecastRow);
@@ -58,7 +58,7 @@ for (let i = 0; i < conditions.length; i++) {
 
   condition.addEventListener('click', (e) => {
     highlightToggle(conditionToggles, i);
-    updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData, dayPicked, condition.className);
+    updateHourly(hourlyForecastRow, currentConditionsDisplay, currentConditionsData, weeklyConditionsData, dayPicked, condition.classList[0]);
   });
 }
 
